@@ -1,5 +1,5 @@
 {
-  "name": "vue-prj-todo",
+  "name": "vue-prj-todo-provide",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

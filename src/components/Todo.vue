@@ -7,9 +7,9 @@
     </td>
     <td>{{ todo.done }}</td>
     <td>
-      <button v-show="!editState" class="btn btn-sm btn-primary mx-1" @click="$emit('done-todo', index)">Done/Undone
+      <button v-show="!editState" class="btn btn-sm btn-primary mx-1" @click="doneTodo(index)">Done/Undone
       </button>
-      <button v-show="!editState" class="btn btn-sm btn-danger mx-1" @click="$emit('delete-todo', index)">Delete
+      <button v-show="!editState" class="btn btn-sm btn-danger mx-1" @click="deleteTodo(index)">Delete
       </button>
       <button v-show="!editState" class="btn btn-sm btn-warning mx-1" @click="editRow">Edit</button>
       <button v-show="editState" class="btn btn-sm btn-success mx-1" @click="doneEdit">Save</button>
@@ -25,10 +25,10 @@ export default {
     'todo',
     'index'
   ],
-  emits: [
-    'done-todo',
-    'delete-todo',
-    'edit-todo',
+  inject: [
+    'doneTodo',
+    'deleteTodo',
+    'editTodo',
   ],
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
     doneEdit() {
       this.editState = false
       this.todo.text = this.editText
-      this.$emit('edit-todo', this.index, this.editText)
+      this.editTodo(this.index, this.editText)
     }
   }
 }

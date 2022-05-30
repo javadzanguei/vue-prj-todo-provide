@@ -12,7 +12,7 @@
   <main>
     <CreateTodo class="py-5" @add-todo="addTodo"/>
     <hr>
-    <TodoList :todos="todos" @done-todo="doneTodo" @edit-todo="editTodo" @delete-todo="deleteTodo"/>
+    <TodoList/>
   </main>
 </template>
 
@@ -25,6 +25,7 @@ main {
 <script>
 import CreateTodo from "./components/CreateTodo.vue";
 import TodoList from "./components/TodoList.vue";
+import {computed} from "vue";
 
 export default {
   components: {
@@ -34,6 +35,14 @@ export default {
   data() {
     return {
       todos: [],
+    }
+  },
+  provide() {
+    return {
+      todos: computed(() => this.todos),
+      doneTodo: this.doneTodo,
+      deleteTodo: this.deleteTodo,
+      editTodo: this.editTodo,
     }
   },
   methods: {

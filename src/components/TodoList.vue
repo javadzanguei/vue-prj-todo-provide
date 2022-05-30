@@ -11,8 +11,7 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <Todo v-for="(todo, index) in todos" :index="index" :todo="todo"
-              @done-todo="doneTodo" @edit-todo="editTodo" @delete-todo="deleteTodo"></Todo>
+        <Todo v-for="(todo, index) in todos.value" :index="index" :todo="todo"></Todo>
         </tbody>
       </table>
     </div>
@@ -26,28 +25,9 @@ export default {
   components: {
     Todo
   },
-  props: {
-    todos: {
-      type: Array,
-      required: true,
-    }
-  },
-  emits: [
-    'done-todo',
-    'delete-todo',
-    'edit-todo',
+  inject: [
+      'todos',
   ],
-  methods: {
-    doneTodo(todoIndex) {
-      this.$emit('done-todo', todoIndex);
-    },
-    deleteTodo(todoIndex) {
-      this.$emit('delete-todo', todoIndex);
-    },
-    editTodo(todoIndex, todoText) {
-      this.$emit('edit-todo', todoIndex, todoText);
-    },
-  }
 }
 </script>
 
