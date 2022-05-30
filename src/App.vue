@@ -33,33 +33,24 @@ export default {
   },
   data() {
     return {
-      todos: [
-        {
-          text: 'Call students',
-          done: false,
-        },
-        {
-          text: 'Call Teacher',
-          done: false,
-        }
-      ]
+      todos: [],
     }
   },
   methods: {
-    addTodo(newTodoText) {
-      this.todos[this.todos.length] = {
-        text: newTodoText,
+    addTodo(text) {
+      this.todos.push({
+        text,
         done: false,
-      };
+      });
     },
     doneTodo(todoIndex) {
-      this.todos[todoIndex].done = !this.todos[todoIndex].done;
+      this.todos[todoIndex].done = !this.todos[todoIndex].done
     },
     deleteTodo(todoIndex) {
-      this.todos = this.todos.filter((todo, index) => index !== todoIndex);
+      this.todos = this.todos.filter((todo, index) => index !== todoIndex)
     },
-    editTodo(todoIndex) {
-
+    editTodo(todoIndex, todoText) {
+      this.todos[todoIndex].text = todoText
     },
   }
 }

@@ -7,20 +7,12 @@
           <th scope="col">#</th>
           <th scope="col">Text</th>
           <th scope="col" style="width: 50px;">Status</th>
-          <th scope="col" style="width: 250px;">Command</th>
+          <th scope="col" style="width: 270px;">Command</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <tr v-for="(todo, index) in todos">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ todo.text }}</td>
-          <td>{{ todo.done }}</td>
-          <td>
-            <button class="btn btn-sm btn-primary mx-1" @click="$emit('done-todo', index)">Done/Undone</button>
-            <button class="btn btn-sm btn-danger mx-1" @click="$emit('delete-todo', index)">Delete</button>
-            <button class="btn btn-sm btn-warning mx-1" @click="$emit('edit-todo', index)">Edit</button>
-          </td>
-        </tr>
+        <Todo v-for="(todo, index) in todos" :index="index" :todo="todo"
+              @done-todo="doneTodo" @edit-todo="editTodo" @delete-todo="deleteTodo"></Todo>
         </tbody>
       </table>
     </div>
@@ -28,8 +20,12 @@
 </template>
 
 <script>
+import Todo from "./Todo.vue";
 export default {
   name: "TodoList",
+  components: {
+    Todo
+  },
   props: {
     todos: {
       type: Array,
@@ -40,7 +36,18 @@ export default {
     'done-todo',
     'delete-todo',
     'edit-todo',
-  ]
+  ],
+  methods: {
+    doneTodo(todoIndex) {
+      this.$emit('done-todo', todoIndex);
+    },
+    deleteTodo(todoIndex) {
+      this.$emit('delete-todo', todoIndex);
+    },
+    editTodo(todoIndex, todoText) {
+      this.$emit('edit-todo', todoIndex, todoText);
+    },
+  }
 }
 </script>
 
