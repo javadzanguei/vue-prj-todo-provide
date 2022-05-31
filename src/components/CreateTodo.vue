@@ -4,7 +4,7 @@
       <form @submit.prevent>
         <div class="input-group mb-3">
           <input v-model="newTodoText" aria-describedby="button-addon2" aria-label="Todo text" class="form-control"
-                 placeholder="Todo text" type="text" @keyup.enter="addTodo">
+                 placeholder="Todo text" type="text" @keyup.enter="addTodo" ref="txtAddTodo">
           <button id="button-addon2" class="btn btn-success" type="button" @click="addTodo">Add</button>
         </div>
       </form>
@@ -19,6 +19,9 @@ export default {
     return {
       newTodoText: ''
     }
+  },
+  mounted() {
+    this.$refs.txtAddTodo.focus()
   },
   methods: {
     addTodo() {
